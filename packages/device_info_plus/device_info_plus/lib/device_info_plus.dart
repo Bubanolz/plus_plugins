@@ -16,7 +16,6 @@ export 'package:device_info_plus_platform_interface/device_info_plus_platform_in
         IosUtsname,
         LinuxDeviceInfo,
         MacOsDeviceInfo,
-        WindowsDeviceInfo,
         WebBrowserInfo,
         BrowserName;
 
@@ -74,12 +73,6 @@ class DeviceInfoPlugin {
   Future<MacOsDeviceInfo> get macOsInfo async =>
       _cachedMacosDeviceInfo ??= await _platform.macosInfo();
 
-  WindowsDeviceInfo? _cachedWindowsDeviceInfo;
-
-  /// Returns device information for Windows.
-  Future<WindowsDeviceInfo> get windowsInfo async =>
-      _cachedWindowsDeviceInfo ??= await _platform.windowsInfo()!;
-
   /// Returns device information for the current platform.
   Future<BaseDeviceInfo> get deviceInfo async {
     if (kIsWeb) {
@@ -93,8 +86,6 @@ class DeviceInfoPlugin {
         return linuxInfo;
       } else if (Platform.isMacOS) {
         return macOsInfo;
-      } else if (Platform.isWindows) {
-        return windowsInfo;
       }
     }
 
